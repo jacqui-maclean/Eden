@@ -7,7 +7,9 @@ interface Props {
 }
 
 const ListItem = ({ item, searchReturn, onRequest }: Props) => {
-  const variableClass = searchReturn ? "p-3 bg-warning-subtle" : "";
+  const variableClass = searchReturn
+    ? "p-3 bg-warning-subtle animationContainer"
+    : "";
   return (
     <tr>
       <td className={variableClass}>{item.customer_id}</td>
