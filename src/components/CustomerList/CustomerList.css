@@ -1,4 +1,5 @@
 .mainContainer {
   padding-top: 2rem;
   justify-content: space-evenly;
+  max-width: 977px;
 }

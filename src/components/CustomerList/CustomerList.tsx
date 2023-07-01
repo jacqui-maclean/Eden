@@ -52,11 +52,7 @@ const CustomerList = () => {
     );
     setCustomerName(selectedCustomer[0].customer_name);
   };
-  // let filteredCustomers: Customer[] | undefined = found
-  //   ? customers?.filter(
-  //       (customer) => customer.customer_name !== found.customer_name
-  //     )
-  //   : customers;
+
   let customerList: Customer[] | undefined = found
     ? customers?.filter(
         (customer) => customer.customer_name !== found.customer_name
