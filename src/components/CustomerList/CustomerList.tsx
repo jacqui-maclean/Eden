@@ -52,22 +52,20 @@ const CustomerList = () => {
     );
     setCustomerName(selectedCustomer[0].customer_name);
   };
-
+  let filteredCustomers: Customer[] | undefined = found
+    ? customers?.filter(
+        (customer) => customer.customer_name !== found.customer_name
+      )
+    : customers;
+  console.log("filteredCustomers ", filteredCustomers);
+  console.log("found ", found);
   return (
     <div className="container text-center">
       <div className="row mainContainer">
         <Search onSearch={handleSearch} />
 
-        <table className="table">
+        <table className="table px-2">
           <thead>
-            {found ? (
-              <ListItem
-                item={found}
-                key={found.customer_id}
-                searchReturn={true}
-                onRequest={handleRequest}
-              />
-            ) : null}
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Name</th>
@@ -76,14 +74,31 @@ const CustomerList = () => {
             </tr>
           </thead>
           <tbody>
-            {customers?.map((customer) => (
+            {found ? (
               <ListItem
-                item={customer}
-                searchReturn={false}
-                key={customer.customer_id}
+                item={found}
+                key={found.customer_id}
+                searchReturn={true}
                 onRequest={handleRequest}
               />
-            ))}
+            ) : null}
+            {found
+              ? filteredCustomers?.map((customer) => (
+                  <ListItem
+                    item={customer}
+                    searchReturn={false}
+                    key={customer.customer_id}
+                    onRequest={handleRequest}
+                  />
+                ))
+              : customers?.map((customer) => (
+                  <ListItem
+                    item={customer}
+                    searchReturn={false}
+                    key={customer.customer_id}
+                    onRequest={handleRequest}
+                  />
+                ))}
           </tbody>
         </table>
       </div>
