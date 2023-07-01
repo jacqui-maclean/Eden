@@ -17,20 +17,25 @@ const CustomerList = () => {
   const [showOrders, setShowOrders] = useState(false);
   const [customerId, setCustomerId] = useState("");
   const [customerName, setCustomerName] = useState("");
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchCustomers = async () => {
-      const response = await fetch(
-        "https://eve.edenpetfoods.com/api/customers",
-        {
-          headers: {
-            Authorization: API_KEY,
-          },
-        }
-      );
-      let results = await response.json();
-      let customers = results.Response;
-      setCustomers(customers);
+      try {
+        const response = await fetch(
+          "https://eve.edenpetfoods.com/api/customers",
+          {
+            headers: {
+              Authorization: API_KEY,
+            },
+          }
+        );
+        let results = await response.json();
+        let customers = results.Response;
+        setCustomers(customers);
+      } catch (error) {
+        setIsError(true);
+      }
     };
     fetchCustomers();
   }, []);
@@ -59,7 +64,9 @@ const CustomerList = () => {
       )
     : customers;
 
-  return (
+  return isError ? (
+    <h3>Error! Please try again later</h3>
+  ) : (
     <div className="container text-center">
       <div className="row mainContainer">
         <Search onSearch={handleSearch} />
