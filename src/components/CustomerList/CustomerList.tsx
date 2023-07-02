@@ -4,6 +4,7 @@ import ListItem from "../ListItem";
 import Search from "../Search";
 import Modal from "../Modal/modal";
 import "./CustomerList.css";
+
 export interface Customer {
   customer_email: string;
   customer_id: string;
